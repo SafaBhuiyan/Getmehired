@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ProfileRepository {
     public Profile getProfile(){
-        Profile profile = new Profile("Samsad", 35, new Address("Tokyo", "Japan"), "256848");
+        Profile profile = new Profile("Shamsad", 35, new Address("Tokyo", "Japan"), "256848");
         return profile;
     }
 }
