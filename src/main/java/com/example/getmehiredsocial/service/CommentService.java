@@ -25,7 +25,16 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public void delete(String id) {
-        commentRepository.deleteById(id);
+    public void delete(String commentId) {
+        commentRepository.deleteById(commentId);
+    }
+    //public void deleteByPhotoId(String photoId){
+    //  commentRepository.deleteByPhotoId(photoId);
+    //}
+
+    public void deleteCommentByPhotoId(String photoId) {
+       commentRepository.deleteByPhotoId(photoId);
     }
 }
+
+

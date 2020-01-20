@@ -3,8 +3,10 @@ package com.example.getmehiredsocial.resource;
 import com.example.getmehiredsocial.model.User;
 import com.example.getmehiredsocial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,17 +21,17 @@ public class UserResource {
     }
 
     @PostMapping
-    public void saveUser(@RequestBody User user){
+    public void saveUser(@Valid @RequestBody User user){
         userService.save(user);
     }
-    @PutMapping("/{id}")
-    public void editUser(@RequestBody User user,@PathVariable ("id") String id){
-        user.setId(id);
+    @PutMapping("/{userId}")
+    public void editUser(@RequestBody User user,@PathVariable ("userId") String userId){
+        user.setUserId(userId);
         userService.edit(user);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable("id") String id){
-        userService.delete(id);
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable("userId") String userId){
+        userService.delete(userId);
     }
 }

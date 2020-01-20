@@ -1,10 +1,12 @@
 package com.example.getmehiredsocial.resource;
 
+import com.example.getmehiredsocial.exception.InvalidAlbumIdException;
 import com.example.getmehiredsocial.model.Album;
 import com.example.getmehiredsocial.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,17 +21,27 @@ public class AlbumResource {
     }
 
     @PostMapping
-    public void saveAlbum(@RequestBody Album album){
+    public void saveAlbum(@Valid @RequestBody Album album){
         albumService.save(album);
     }
 
-    @PutMapping("/{id}")
-    public void editAlbum(@RequestBody Album album,@PathVariable("id") String id){
-        album.setId(id);
+    @PutMapping("/{albumId}")
+    public void editAlbum(@RequestBody Album album,@PathVariable("albumId") String albumId){
+        album.setAlbumId(albumId);
         albumService.edit(album);
+
     }
-    @DeleteMapping("/{id}")
-    public void deleteAlbum(@PathVariable("id") String id){
-        albumService.delete(id);
+    @DeleteMapping("/{albumId}")
+    public void deleteAlbumWithPhotosComments(@PathVariable("albumId") String albumId){
+        albumService.delete(albumId);
     }
+
+    @DeleteMapping("/dOnlyAlbums/{albumId}")
+    public void deleteAlbumOnly(@PathVariable("albumId") String albumId){
+        albumService.deleteById(albumId);
+
+    }
+
+
 }
+

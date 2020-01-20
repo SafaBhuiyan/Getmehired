@@ -24,8 +24,11 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void delete(String id) {
-        userRepository.deleteById(id);
+    public void delete(String userId) {
+        userRepository.deleteById(userId);
     }
 
+    public boolean emailExist(String email) {
+         return userRepository.existsByEmail(email);
+    }
 }

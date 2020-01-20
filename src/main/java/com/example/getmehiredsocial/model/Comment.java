@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 import java.util.Date;
@@ -17,8 +18,10 @@ import java.util.Date;
 
 public class Comment {
     @Id
-    private String id;
-    private String photId;
+    private String commentId;
+    private String photoId;
+
+    @Size(min = 1, max = 20)
     private String message;
     private String createdBy;
     private Date dateCreated;

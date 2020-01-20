@@ -15,9 +15,11 @@ import java.util.Date;
 @Document(collection="Photos")
 public class Photo {
     @Id
-    private String id;
+    private String photoId;
     private String albumId;
     private String photoUrl;
     private String createdBy;
     private Date dateCreated;
+
+
 }

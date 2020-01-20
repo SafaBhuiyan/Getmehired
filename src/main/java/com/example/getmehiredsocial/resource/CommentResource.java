@@ -1,6 +1,7 @@
 package com.example.getmehiredsocial.resource;
 
 
+import com.example.getmehiredsocial.exception.InvalidPhotoIdException;
 import com.example.getmehiredsocial.model.Comment;
 import com.example.getmehiredsocial.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,17 @@ public class CommentResource {
     public void saveComment(@RequestBody Comment comment){
         commentService.save(comment);
     }
-    @PutMapping("/{id}")
-    public void editComment(@RequestBody Comment comment, @PathVariable("id") String id){
-        comment.setId(id);
+
+    @PutMapping("/{commentId}")
+    public void editComment(@RequestBody Comment comment, @PathVariable("commentId") String commentId)throws Exception{
+        comment.setCommentId(commentId);
         commentService.edit(comment);
+        throw new InvalidPhotoIdException("Invalid PhotoId given, Please enter a valid Photo Id");
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteComment(@PathVariable("id") String id){
-        commentService.delete(id);
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable("commentId") String commentId){
+        commentService.delete(commentId);
     }
 
 
