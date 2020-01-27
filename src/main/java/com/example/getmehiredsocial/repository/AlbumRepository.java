@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface AlbumRepository extends MongoRepository<Album, String> {
+
+
     boolean existsByCoverPhotoUrl(String coverPhotoUrl);
 
     //Album findByAlbumId(String albumId);

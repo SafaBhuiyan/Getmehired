@@ -1,5 +1,7 @@
 package com.example.getmehiredsocial.service;
 
+import com.example.getmehiredsocial.exception.InvalidAlbumIdException;
+import com.example.getmehiredsocial.model.Album;
 import com.example.getmehiredsocial.model.Photo;
 import com.example.getmehiredsocial.model.User;
 import com.example.getmehiredsocial.repository.AlbumRepository;
@@ -18,6 +20,8 @@ public class PhotoService {
     CommentService commentService;
     @Autowired
     AlbumService albumService;
+    @Autowired
+  AlbumRepository albumRepository;
 
 
     public List<Photo> getPhotos() {
@@ -25,13 +29,11 @@ public class PhotoService {
     }
 
     public void save(Photo photo) {
-       //albumService.checkAlbumId(photo, albumId);
-         photoRepository.save(photo);
+        photoRepository.save(photo);
     }
 
     public void edit(Photo photo) {
           photoRepository.save(photo);
-
     }
 
     public void delete(String photoId) {
@@ -43,17 +45,14 @@ public class PhotoService {
 
         photoRepository.deleteByAlbumId(albumId);
 
-        //commentService.deleteCommentByPhotoId(photoRepository.findByAlbumId(albumId).getphotoId());
-
-
-    }
-
-    public Photo getByPhotoId(String photoId) {
-         return photoRepository.findByPhotoId(photoId);
     }
 
     //public Photo getSinglePhotoByAlbumId(String albumId) {
       //  return photoRepository.findByAlbumId(albumId);
     //}
+
+    public boolean albumIdExists(String albumId){
+        return photoRepository.existsByAlbumId(albumId);
+    }
 }
 

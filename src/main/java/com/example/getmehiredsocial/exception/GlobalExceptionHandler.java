@@ -20,9 +20,9 @@ public class GlobalExceptionHandler {
     }
 
     //@ExceptionHandler(Exception.class)
-   // public ResponseEntity<?> globalExceptionHandler(Exception ex, WebRequest request){
-        //return new ResponseEntity<> ( "error: Invalid Album Id given Please enter valid Album Id", HttpStatus.BAD_REQUEST);
-   // }
+    //public ResponseEntity<?> globalExceptionHandler(Exception ex, WebRequest request){
+        //return new ResponseEntity<> ( "error:", HttpStatus.BAD_REQUEST);
+   //}
 
 
 }

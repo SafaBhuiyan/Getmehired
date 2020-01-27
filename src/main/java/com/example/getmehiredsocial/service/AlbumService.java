@@ -58,19 +58,5 @@ PhotoRepository photoRepository;
       return albumRepository.existsByCoverPhotoUrl(coverPhotoUrl);
     }
 
-    //public String getAlbumId(String albumId) {
-       // return albumRepository.findAlbumId(albumId);
-    //}
 
-    /*
-    public void checkAlbumId(Photo photo, String albumId)throws Exception {
-        List <Photo> oldPhoto = photoRepository.findAll();
-        for(Photo obj: oldPhoto){
-            if (obj.getAlbumId().equals(albumId)){
-                photoRepository.save(photo);
-            }else{
-                throw new InvalidPhotoIdException("Invalid Photo Id given, Please enter valid Photo Id");
-            }
-        }
-    }*/
 }

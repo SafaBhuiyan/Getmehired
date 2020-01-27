@@ -29,41 +29,20 @@ public class PhotoResource {
     }
 
     @PostMapping
-    public void savePhoto(@RequestBody Photo photo) {
-        photoService.save(photo);
+    public void savePhoto(@RequestBody Photo photo, String albumId) throws Exception{
+        if (photoService.albumIdExists(albumId)) {
+            photoService.save(photo);
+        } else {
+            throw new InvalidAlbumIdException("Invalid Album Id given Please enter valid Album Id");
+        }
+
     }
 
-
-
-    @PutMapping("/{photoId}")
-    public void editPhoto(@RequestBody Photo photo, @PathVariable("photoId") String photoId) throws Exception {
-            Photo oldPhoto = photoService.getByPhotoId(photoId);
-            photo.setPhotoId(oldPhoto.getPhotoId());
-            List<Album> album = albumRepository.findAll();
-            for(Album albumObject: album) {
-                if (albumObject.getAlbumId().equals(photo.getAlbumId())) {
-                    photoService.edit(photo);
-                } else {
-                    throw new InvalidAlbumIdException("Invalid Album Id given Please enter valid Album Id");
-                }
-            }
-    }
-
-
-
-
-    //photo.getAlbumId().equals(albumRepository.findByAlbumId(albumId).);
-
-    //throw new InvalidPhotoIdException("Invalid Photo Id given, Please enter valid Photo Id");
-
-
-
-/*
     @PutMapping("/{photoId}")
     public void editPhoto(@RequestBody Photo photo,@PathVariable("photoId") String photoId){
         photo.setPhotoId(photoId);
         photoService.edit(photo);
-    }*/
+    }
 
     @DeleteMapping("/{photoId}")
     public void deletePhoto(@PathVariable("photoId") String photoId) {
