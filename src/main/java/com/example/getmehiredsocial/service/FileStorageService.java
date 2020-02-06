@@ -8,21 +8,28 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
+import com.example.getmehiredsocial.model.FileStorage;
+import com.example.getmehiredsocial.repository.FileStorageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 @Service
 public class FileStorageService {
+    @Autowired
+    FileStorageRepository fileStorageRepository;
+
 
     @Value("${aws.s3.accessKey}")
     private String awsAccessKey;
     @Value("${aws.s3.secretKey}")
     private String awsSecretKey;
 
-    public void uploadFile(MultipartFile multipartFile) throws IOException {
+    public void uploadFile( MultipartFile multipartFile) throws IOException {
         ObjectMetadata data = new ObjectMetadata();
         data.setContentType(multipartFile.getContentType());
         data.setContentLength(multipartFile.getSize());

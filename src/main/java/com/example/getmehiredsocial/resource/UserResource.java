@@ -1,5 +1,6 @@
 package com.example.getmehiredsocial.resource;
 
+import com.amazonaws.services.securitytoken.model.InvalidIdentityTokenException;
 import com.example.getmehiredsocial.model.User;
 import com.example.getmehiredsocial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,15 @@ public class UserResource {
     @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable("userId") String userId){
         userService.delete(userId);
+    }
+
+    @GetMapping("/user authentication")
+    public User me(@RequestParam("idToken") String idToken){
+        if(userService.isValidUser(idToken)){
+            String email = userService.fireBaseUser.getEmail();
+            return userService.getByEmail(email);
+        } else {
+            throw new InvalidIdentityTokenException("Invalid Token is given, Please enter Valid Token......");
+        }
     }
 }
